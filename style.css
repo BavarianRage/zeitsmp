@@ -1,0 +1,601 @@
+:root {
+  --bg: #050608;
+  --bg-alt: #11151b;
+  --accent: #00ff7f;
+  --accent-soft: #00c86a;
+  --accent-warning: #ffd54a;
+  --text: #f5f5f5;
+  --muted: #a8b3c1;
+  --card: #181c24;
+  --border-pixel: #000000;
+  --shadow-strong: 0 0 0 3px #000000, 0 16px 0 #000000;
+  --transition-fast: 0.18s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* … dein kompletter restlicher CSS aus der Datei … */
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZEITSMP – Launch am 01.01.2026</title>
+  <meta name="description" content="ZEITSMP – ein neuer deutscher Minecraft SMP. Server-Launch am 01.01.2026.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rubik:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #050608;
+      --bg-alt: #11151b;
+      --accent: #00ff7f;
+      --accent-soft: #00c86a;
+      --accent-warning: #ffd54a;
+      --text: #f5f5f5;
+      --muted: #a8b3c1;
+      --card: #181c24;
+      --border-pixel: #000000;
+      --shadow-strong: 0 0 0 3px #000000, 0 16px 0 #000000;
+      --transition-fast: 0.18s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Rubik", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: radial-gradient(circle at top, #20293a 0, #050608 55%);
+      overflow-x: hidden;
+    }
+
+    .bg-grid {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity: 0.4;
+      z-index: -1;
+    }
+
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 3rem;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+    }
+
+    .nav-logo img {
+      height: 90px;
+      image-rendering: pixelated;
+      filter: drop-shadow(0 6px 0 #000000);
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      padding: 0;
+      margin: 0;
+    }
+
+    .nav-links a {
+      font-family: "Press Start 2P", system-ui;
+      font-size: 0.55rem;
+      text-decoration: none;
+      color: var(--muted);
+      padding: 0.6rem 0.9rem;
+      background: #00000080;
+      border: 2px solid #3a414f;
+      box-shadow: 0 4px 0 #000000;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+                  background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+    }
+
+    .nav-links a:hover {
+      transform: translateY(-2px);
+      background: var(--accent-soft);
+      color: #02140b;
+      border-color: #000000;
+      box-shadow: 0 7px 0 #000000;
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.1fr);
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-family: "Press Start 2P", system-ui;
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      margin: 0 0 1.2rem;
+      text-transform: uppercase;
+      text-shadow: 0 4px 0 #000000;
+    }
+
+    .hero-subtitle {
+      margin: 0 0 1.5rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .hero-subtitle .highlight {
+      color: var(--accent-warning);
+      font-weight: 600;
+    }
+
+    .countdown-card {
+      margin-top: 0.5rem;
+      padding: 1.4rem 1.5rem;
+      background: linear-gradient(135deg, #161c26, #10141c);
+      border-radius: 14px;
+      border: 3px solid #000000;
+      box-shadow: var(--shadow-strong);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .countdown-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(120deg, #00ff7f20, transparent 55%, #ffd54a20);
+      opacity: 0.7;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .countdown-card h2 {
+      font-family: "Press Start 2P";
+      font-size: 0.9rem;
+      margin: 0 0 1rem;
+      letter-spacing: 1px;
+    }
+
+    .countdown-timer {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.7rem;
+    }
+
+    .time-block {
+      flex: 1 1 90px;
+      min-width: 80px;
+      background: #05070b;
+      border-radius: 10px;
+      border: 3px solid #000000;
+      box-shadow: 0 6px 0 #000000;
+      padding: 0.7rem 0.4rem;
+      text-align: center;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+    }
+
+    .time-block span {
+      display: block;
+      font-family: "Press Start 2P";
+      font-size: 1rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .time-block small {
+      text-transform: uppercase;
+      font-size: 0.55rem;
+      color: var(--muted);
+      letter-spacing: 1px;
+    }
+
+    .time-block:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 9px 0 #000000;
+      background: #0e151f;
+    }
+
+    .countdown-info {
+      margin: 0.2rem 0 0.9rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .live-text {
+      font-family: "Press Start 2P";
+      color: var(--accent);
+      font-size: 0.9rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .btn {
+      font-family: "Press Start 2P";
+      font-size: 0.6rem;
+      padding: 0.8rem 1.1rem;
+      border-radius: 10px;
+      border: 3px solid #000000;
+      box-shadow: 0 6px 0 #000000;
+      cursor: pointer;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+                  background var(--transition-fast), color var(--transition-fast);
+      background: #11151b;
+      color: var(--text);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #00ff7f, #00c86a);
+      color: #02140b;
+    }
+
+    .btn-secondary {
+      background: #232938;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 9px 0 #000000;
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 1.1rem;
+    }
+
+    .block-card {
+      position: relative;
+      width: 100%;
+      max-width: 260px;
+      height: 90px;
+      transform-style: preserve-3d;
+      transform: rotateX(55deg) rotateZ(-35deg);
+      transition: transform var(--transition-fast), filter var(--transition-fast);
+      cursor: pointer;
+      margin-left: auto;
+    }
+
+    .block-card .block-top,
+    .block-card .block-side {
+      position: absolute;
+      inset: 0;
+      border-radius: 6px;
+      border: 3px solid #000000;
+    }
+
+    .block-top {
+      background-size: 32px 32px;
+      background-repeat: repeat;
+      transform: translateZ(26px);
+    }
+
+    .block-side {
+      background-size: 32px 32px;
+      background-repeat: repeat;
+      filter: brightness(0.8);
+      transform: translateY(18px) rotateX(90deg);
+      transform-origin: top;
+    }
+
+    .block-label {
+      position: absolute;
+      left: 50%;
+      bottom: -8px;
+      transform: translateX(-50%);
+      padding: 0.25rem 0.5rem;
+      background: #000000d0;
+      border-radius: 999px;
+      border: 2px solid #ffffff30;
+      font-family: "Press Start 2P";
+      font-size: 0.55rem;
+      white-space: nowrap;
+    }
+
+    .block-card.grass .block-top {
+      background-image: linear-gradient(#68c93e, #4a9b2c);
+    }
+
+    .block-card.grass .block-side {
+      background-image: linear-gradient(#5c3b26, #3a2315);
+    }
+
+    .block-card.stone .block-top {
+      background-image: linear-gradient(#b0b6c3, #828a99);
+    }
+
+    .block-card.stone .block-side {
+      background-image: linear-gradient(#858fa1, #5b6475);
+    }
+
+    .block-card.diamond .block-top {
+      background-image: linear-gradient(#44f3ff, #00b0c8);
+    }
+
+    .block-card.diamond .block-side {
+      background-image: linear-gradient(#36a6c0, #22758b);
+    }
+
+    .block-card:hover {
+      transform: rotateX(52deg) rotateZ(-30deg) translateY(-6px);
+      filter: brightness(1.1);
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto 3rem;
+      padding: 0 1.5rem;
+    }
+
+    .section {
+      margin-top: 2.5rem;
+    }
+
+    .section h2 {
+      font-family: "Press Start 2P";
+      font-size: 1rem;
+      margin-bottom: 1.2rem;
+      text-shadow: 0 3px 0 #000000;
+    }
+
+    .section-panel {
+      background: #090c12cc;
+      border-radius: 14px;
+      border: 3px solid #000000;
+      box-shadow: var(--shadow-strong);
+      padding: 1.4rem 1.5rem;
+    }
+
+    .section-panel p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.3rem;
+    }
+
+    .feature-card {
+      background: #090c12cc;
+      border-radius: 14px;
+      border: 3px solid #000000;
+      box-shadow: 0 10px 0 #000000;
+      padding: 1.1rem 1.2rem;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 0 #000000;
+      background: #121722;
+    }
+
+    .feature-card h3 {
+      margin: 0 0 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .feature-card p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 1.5rem;
+      border-top: 1px solid #1c232f;
+      font-size: 0.85rem;
+      color: var(--muted);
+      background: #05070c;
+    }
+
+    @media (max-width: 880px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-side {
+        order: -1;
+        justify-content: center;
+      }
+
+      .block-card {
+        margin: 0 auto;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+
+  <header class="hero">
+    <nav class="nav">
+      <div class="nav-logo">
+        <!-- Für GitHub später: ersetze src durch deinen eigenen Pfad, z.B. img/zeitsmp-logo.png -->
+        <img src="/mnt/data/A_2D_digital_pixel_art_logo_for_\"ZEITSMP\"_in_Minec.png" alt="ZEITSMP Logo">
+      </div>
+      <ul class="nav-links">
+        <li><a href="#countdown">Countdown</a></li>
+        <li><a href="#about">Über ZEITSMP</a></li>
+        <li><a href="#features">Features</a></li>
+      </ul>
+    </nav>
+
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1>ZEITSMP</h1>
+        <p class="hero-subtitle">
+          Ein neuer deutscher Minecraft SMP.<br>
+          <span class="highlight">Der Server startet am 01.01.2026.</span>
+        </p>
+
+        <section id="countdown" class="countdown-card">
+          <h2>Server-Launch in</h2>
+          <div class="countdown-timer">
+            <div class="time-block">
+              <span id="days">00</span>
+              <small>Tage</small>
+            </div>
+            <div class="time-block">
+              <span id="hours">00</span>
+              <small>Stunden</small>
+            </div>
+            <div class="time-block">
+              <span id="minutes">00</span>
+              <small>Minuten</small>
+            </div>
+            <div class="time-block">
+              <span id="seconds">00</span>
+              <small>Sekunden</small>
+            </div>
+          </div>
+          <p class="countdown-info">
+            Trag dir das Datum ein & sei beim Start dabei!
+          </p>
+          <div class="hero-buttons">
+            <a href="#" class="btn btn-primary">Discord beitreten</a>
+            <button class="btn btn-secondary" id="add-to-calendar-btn">📅 In Kalender speichern</button>
+          </div>
+        </section>
+      </div>
+
+      <div class="hero-side">
+        <div class="block-card grass">
+          <div class="block-top"></div>
+          <div class="block-side"></div>
+          <div class="block-label">Survival</div>
+        </div>
+        <div class="block-card stone">
+          <div class="block-top"></div>
+          <div class="block-side"></div>
+          <div class="block-label">Economy</div>
+        </div>
+        <div class="block-card diamond">
+          <div class="block-top"></div>
+          <div class="block-side"></div>
+          <div class="block-label">Custom Plugins</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="about" class="section section-panel">
+      <h2>Was ist ZEITSMP?</h2>
+      <p>
+        ZEITSMP ist ein deutscher Minecraft Survival SMP mit Fokus auf <strong>langfristige Welt</strong>,
+        <strong>stabile Community</strong> und <strong>eigenen Plugins</strong>. Kein Pay2Win–Bullshit,
+        sondern klassisches Minecraft mit modernen QoL-Features.
+      </p>
+    </section>
+
+    <section id="features" class="section features-grid">
+      <article class="feature-card">
+        <h3>🧱 Klassisches Survival</h3>
+        <p>Baue deine Base, farme Ressourcen und erkunde die Welt – ohne Resets jede Woche.</p>
+      </article>
+      <article class="feature-card">
+        <h3>💰 Economy &amp; Shops</h3>
+        <p>Verdiene Ingame-Geld, handel mit anderen Spielern und eröffne eigene Shops.</p>
+      </article>
+      <article class="feature-card">
+        <h3>🛡️ Claims &amp; Sicherheit</h3>
+        <p>Schütze deine Builds mit einem Claim-System, damit keine Trolle deine Base zerstören.</p>
+      </article>
+      <article class="feature-card">
+        <h3>👑 Ränge &amp; Community</h3>
+        <p>Verdien dir deine Ränge durch Aktivität &amp; Events. Fokus auf faire Spieler, nicht auf Echtgeld.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2025 ZEITSMP – Launch am 01.01.2026 • Made mit ❤ und viel Redstone</p>
+  </footer>
+
+  <script>
+    const launchDate = new Date("2026-01-01T00:00:00");
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = launchDate - now;
+
+      if (diff <= 0) {
+        document.querySelector(".countdown-timer").innerHTML = "<span class='live-text'>Der Server ist jetzt LIVE!</span>";
+        return;
+      }
+
+      const seconds = Math.floor(diff / 1000);
+      const days = Math.floor(seconds / 86400);
+      const hours = Math.floor((seconds % 86400) / 3600);
+      const minutes = Math.floor((seconds % 3600) / 60);
+      const secs = seconds % 60;
+
+      document.getElementById("days").textContent = String(days).padStart(2, "0");
+      document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+      document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+      document.getElementById("seconds").textContent = String(secs).padStart(2, "0");
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    document.getElementById("add-to-calendar-btn").addEventListener("click", () => {
+      const icsContent = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//ZEITSMP//DE",
+        "BEGIN:VEVENT",
+        "UID:zeitsmp-launch-2026",
+        "DTSTAMP:20250101T000000Z",
+        "DTSTART:20260101T000000Z",
+        "SUMMARY:ZEITSMP Server-Launch",
+        "DESCRIPTION:ZEITSMP startet heute! Join den Server und sei beim Start dabei.",
+        "END:VEVENT",
+        "END:VCALENDAR"
+      ].join("\r\n");
+
+      const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "ZEITSMP-Launch.ics";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+  </script>
+</body>
+</html>
