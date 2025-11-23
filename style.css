@@ -12,7 +12,9 @@
   --transition-fast: 0.18s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -25,6 +27,7 @@ body {
   overflow-x: hidden;
 }
 
+/* leichtes Grid im Hintergrund */
 .bg-grid {
   pointer-events: none;
   position: fixed;
@@ -86,6 +89,8 @@ body {
   box-shadow: 0 7px 0 #000000;
 }
 
+/* HERO CONTENT */
+
 .hero-content {
   display: grid;
   grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.1fr);
@@ -111,6 +116,8 @@ body {
   color: var(--accent-warning);
   font-weight: 600;
 }
+
+/* COUNTDOWN CARD */
 
 .countdown-card {
   margin-top: 0.5rem;
@@ -191,6 +198,8 @@ body {
   font-size: 0.9rem;
 }
 
+/* BUTTONS */
+
 .hero-buttons {
   display: flex;
   flex-wrap: wrap;
@@ -228,6 +237,8 @@ body {
   box-shadow: 0 9px 0 #000000;
 }
 
+/* BLOCK CARDS / MINECRAFT BLÖCKE */
+
 .hero-side {
   display: grid;
   gap: 1.1rem;
@@ -246,4 +257,167 @@ body {
 }
 
 .block-card .block-top,
-.block-card .
+.block-card .block-side {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  border: 3px solid #000000;
+}
+
+.block-top {
+  background-size: 32px 32px;
+  background-repeat: repeat;
+  transform: translateZ(26px);
+}
+
+.block-side {
+  background-size: 32px 32px;
+  background-repeat: repeat;
+  filter: brightness(0.8);
+  transform: translateY(18px) rotateX(90deg);
+  transform-origin: top;
+}
+
+.block-label {
+  position: absolute;
+  left: 50%;
+  bottom: -8px;
+  transform: translateX(-50%);
+  padding: 0.25rem 0.5rem;
+  background: #000000d0;
+  border-radius: 999px;
+  border: 2px solid #ffffff30;
+  font-family: "Press Start 2P";
+  font-size: 0.55rem;
+  white-space: nowrap;
+}
+
+.block-card.grass .block-top {
+  background-image: linear-gradient(#68c93e, #4a9b2c);
+}
+
+.block-card.grass .block-side {
+  background-image: linear-gradient(#5c3b26, #3a2315);
+}
+
+.block-card.stone .block-top {
+  background-image: linear-gradient(#b0b6c3, #828a99);
+}
+
+.block-card.stone .block-side {
+  background-image: linear-gradient(#858fa1, #5b6475);
+}
+
+.block-card.diamond .block-top {
+  background-image: linear-gradient(#44f3ff, #00b0c8);
+}
+
+.block-card.diamond .block-side {
+  background-image: linear-gradient(#36a6c0, #22758b);
+}
+
+.block-card:hover {
+  transform: rotateX(52deg) rotateZ(-30deg) translateY(-6px);
+  filter: brightness(1.1);
+}
+
+/* SECTION + FEATURES */
+
+main {
+  max-width: 1100px;
+  margin: 0 auto 3rem;
+  padding: 0 1.5rem;
+}
+
+.section {
+  margin-top: 2.5rem;
+}
+
+.section h2 {
+  font-family: "Press Start 2P";
+  font-size: 1rem;
+  margin-bottom: 1.2rem;
+  text-shadow: 0 3px 0 #000000;
+}
+
+.section-panel {
+  background: #090c12cc;
+  border-radius: 14px;
+  border: 3px solid #000000;
+  box-shadow: var(--shadow-strong);
+  padding: 1.4rem 1.5rem;
+}
+
+.section-panel p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.3rem;
+}
+
+.feature-card {
+  background: #090c12cc;
+  border-radius: 14px;
+  border: 3px solid #000000;
+  box-shadow: 0 10px 0 #000000;
+  padding: 1.1rem 1.2rem;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 0 #000000;
+  background: #121722;
+}
+
+.feature-card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+}
+
+.feature-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* FOOTER */
+
+.footer {
+  text-align: center;
+  padding: 1.5rem;
+  border-top: 1px solid #1c232f;
+  font-size: 0.85rem;
+  color: var(--muted);
+  background: #05070c;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 880px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-side {
+    order: -1;
+    justify-content: center;
+  }
+
+  .block-card {
+    margin: 0 auto;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .hero {
+    padding-top: 1rem;
+  }
+}
